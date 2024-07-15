@@ -2,15 +2,15 @@
 // Include the header
 include_once(__DIR__ . '/_components/Header.php');
 
-// Fetch all the active cam.pings that have at least 3 stars
-$res = $mysqli->query("
+// Fetch all the active campings that have a rating of at least 3 stars
+if ($result = $mysqli->query("
 SELECT * FROM campings 
 WHERE actif = 1 
 AND nb_etoiles >= 3 
 ORDER BY nom ASC;
-");
-
-$campings = $res->fetch_all(MYSQLI_ASSOC);
+")) {
+  $campings = $result->fetch_all(MYSQLI_ASSOC);
+}
 
 ?>
 

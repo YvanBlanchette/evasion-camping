@@ -3,8 +3,9 @@
 include_once(__DIR__ . '/_components/Header.php');
 
 // Fetch the 8 most popular campings
-$res = $mysqli->query("SELECT * FROM campings WHERE actif = 1 ORDER BY popularite DESC LIMIT 8;");
-$campings = $res->fetch_all(MYSQLI_ASSOC);
+if ($result = $mysqli->query("SELECT * FROM campings WHERE actif = 1 ORDER BY popularite DESC LIMIT 8;")) {
+  $campings = $result->fetch_all(MYSQLI_ASSOC);
+}
 
 ?>
 

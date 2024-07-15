@@ -3,7 +3,8 @@ $title = getTitle();
 ?>
 
 <header class="w-full h-[60px] bg-[#738C69]/40 flex justify-between px-[5vw] items-center">
-  <h2 class="text-2xl uppercasE"><?php echo $title == "Index" ? "Accueil" : $title; ?></h2>
+  <h2 class="text-2xl uppercasE">
+    <?php echo $title == "Index" || $title == "evasion-camping" ? "Accueil" : $title; ?></h2>
 
   <?php if ($title == 'NOS CAMPINGS') : ?>
     <nav class="flex-1 flex items-center justify-evenly px-10 h-full ">
