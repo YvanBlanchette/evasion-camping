@@ -29,7 +29,7 @@ function getTitle()
 
   if ($title == "index") {
     $title = "Accueil";
-  } elseif ($title == "liste_campings_trois_etoiles_et_plus" || $title == "liste_campings_par_experience" || $title == "fiche_camping" || $title == "campings") {
+  } elseif ($title == "liste_campings_trois_etoiles_et_plus" || $title == "liste_campings_par_experience" || $title == "fiche_camping" || $title == "liste_campings") {
     $title = "NOS CAMPINGS";
   }
 
