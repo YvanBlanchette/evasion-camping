@@ -7,7 +7,6 @@ if ($mysqli->connect_errno) {
   exit();
 }
 
-
 ?>
 
 <!DOCTYPE html>
@@ -38,6 +37,8 @@ if ($mysqli->connect_errno) {
       }
     }
   </script>
+
+
 </head>
 
 <body class="overflow-x-hidden">

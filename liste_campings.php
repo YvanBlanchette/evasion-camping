@@ -29,11 +29,11 @@ if ($result = $mysqli->query("SELECT * FROM campings WHERE actif = 1 ORDER BY no
             <li>
               <div class="min-h-[200px] rounded-md bg-white shadow-xl flex">
                 <!-- IMAGE -->
-                <div class="w-1/4">
-                  <img class="w-[200px]  h-full rounded-l-md object-cover" src="https://picsum.photos/id/<?= $camping['id_picsum'] ?>/200/200" alt="<?= $camping['nom'] ?>">
+                <div class="w-1/5">
+                  <img class="w-[200px] h-full rounded-l-md object-cover" src="https://picsum.photos/id/<?= $camping['id_picsum'] ?>/200/200" alt="<?= $camping['nom'] ?>">
                 </div>
                 <!-- NAME -->
-                <div class="w-3/4 px-6 pt-2 pb-4 flex flex-col">
+                <div class="w-4/5 px-6 pt-2 pb-4 flex flex-col">
                   <h4 class="text-3xl"><?= $camping['nom'] ?></h4>
                   <!-- REGION/RATING -->
                   <div class="mb-2 flex items-center gap-3">

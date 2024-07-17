@@ -8,16 +8,17 @@ $experience_id = $_GET['experience_id'];
 // If experience_id is provided, fetch the experience name and description
 if ($experience_id) {
   $experience_res = $mysqli->query("SELECT nom, description FROM experiences WHERE id = '$experience_id'");
-  $data = $experience_res->fetch_assoc();
-  $experience_name = $data['nom'];
-  $experience_description = $data['description'];
+  $experience_data = $experience_res->fetch_assoc();
+  $experience_name = $experience_data['nom'];
+  $experience_description = $experience_data['description'];
 }
 
 // If experience_id is provided, prepare the SQL query
 if ($experience_id) {
   if (
-    $requete = $mysqli->prepare("
+    $request = $mysqli->prepare("
 SELECT 
+  campings.id AS id,
   campings.nom AS nom, 
   campings.region AS region, 
   campings.nb_etoiles AS nb_etoiles, 
@@ -35,15 +36,15 @@ ORDER BY
   nom ASC")
   ) {
     // Bind the experience_id parameter to the query
-    $requete->bind_param('i', $experience_id);
+    $request->bind_param('i', $experience_id);
     // Execute the query
-    $requete->execute();
+    $request->execute();
     // Get the result of the query
-    $result = $requete->get_result();
+    $result = $request->get_result();
     // Fetch all the rows from the result and store them in an array
     $campings = $result->fetch_all(MYSQLI_ASSOC);
     // Close the query
-    $requete->close();
+    $request->close();
   }
 }
 

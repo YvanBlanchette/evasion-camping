@@ -24,7 +24,7 @@ ORDER BY nom ASC;
 
     <main class="flex-1 p-10 bg-gray-100 pl-16">
       <!-- Title -->
-      <h1 class="text-4xl uppercase text-center mb-6"><span class="text-[#E28F20] font-bold">campings </span>3<span class="text-[#E28F20] text-4xl">★</span> et plus</h1>
+      <h1 class="text-4xl uppercase text-center mb-6">CAMPINGS 3<span class="text-[#E28F20] text-4xl">★</span> et plus</h1>
 
       <!-- Camping list -->
       <div class="flex flex-wrap justify-between">
@@ -34,11 +34,11 @@ ORDER BY nom ASC;
             <li>
               <div class="min-h-[200px] rounded-md bg-white shadow-xl flex">
                 <!-- IMAGE -->
-                <div class="w-1/4">
+                <div class="w-1/5">
                   <img class="w-[200px]  h-full rounded-l-md object-cover" src="https://picsum.photos/id/<?= $camping['id_picsum'] ?>/200/200" alt="<?= $camping['nom'] ?>">
                 </div>
                 <!-- NAME -->
-                <div class="w-3/4 px-6 pt-2 pb-4 flex flex-col">
+                <div class="w-4/5 px-6 pt-2 pb-4 flex flex-col">
                   <h4 class="text-3xl"><?= $camping['nom'] ?></h4>
                   <!-- REGION/RATING -->
                   <div class="mb-2 flex items-center gap-3">
