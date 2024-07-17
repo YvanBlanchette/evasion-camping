@@ -2,17 +2,20 @@
 // Include the header
 include_once(__DIR__ . '/_components/Header.php');
 
-// Fetch all the active campings that have a rating of at least 3 stars
+$campings = [];
+
+// Get all the active campings that have a rating of at least 3 stars
 if ($result = $mysqli->query("
-SELECT * FROM campings 
-WHERE actif = 1 
-AND nb_etoiles >= 3 
-ORDER BY nom ASC;
+    SELECT * FROM campings 
+    WHERE actif = 1 
+    AND nb_etoiles >= 3 
+    ORDER BY nom ASC
 ")) {
+  // fetch the results from the query and store them in the campings array
   $campings = $result->fetch_all(MYSQLI_ASSOC);
 }
-
 ?>
+
 
 <div class="min-h-screen flex justify-between">
   <!-- Include Sidebar -->

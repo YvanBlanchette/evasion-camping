@@ -1,8 +1,7 @@
 <?php
-include_once(__DIR__ . '../..//include/helpers.php');
+include_once(__DIR__ . '../../include/helpers.php');
 
 $pathname = getSlug();
-
 
 $LINKS = [
   ['name' => 'Accueil', 'href' => 'index.php', 'icon' => 'fa-solid fa-house mr-2'],
@@ -24,16 +23,20 @@ $ADMIN_LINKS = [
 
 function renderMenuItem($link, $pathname)
 {
-  $isActive = $pathname == $link['href'];
+  $isActive = $pathname == $link['href'] ||
+    ($pathname == 'liste_campings_trois_etoiles_et_plus.php' && $link['href'] == 'liste_campings.php') ||
+    ($pathname == 'liste_campings_par_experience.php' && $link['href'] == 'liste_campings.php');
+
   $activeClass = $isActive ? "bg-[#002D0F]/60 text-[#E28F20] pointer-events-none" : "hover:bg-[#002D0F]/50 transition-all duration-300 hover:text-[#E28F20]";
+
   return "
-        <li class='py-4 $activeClass'>
-            <a href='{$link['href']}' class='text-xl px-8 transition-all duration-300 flex items-center gap-2 uppercase'>
-                <i class='{$link['icon']} text-lg'></i>
-                {$link['name']}
-            </a>
-        </li>
-    ";
+    <li class='py-4 $activeClass'>
+        <a href='{$link['href']}' class='text-xl px-8 transition-all duration-300 flex items-center gap-2 uppercase'>
+            <i class='{$link['icon']} text-lg'></i>
+            {$link['name']}
+        </a>
+    </li>
+  ";
 }
 
 ?>

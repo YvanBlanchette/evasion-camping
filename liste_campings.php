@@ -2,12 +2,15 @@
 // Include Header
 include_once(__DIR__ . '/_components/Header.php');
 
-// Fetch all the active campings
-if ($result = $mysqli->query("SELECT * FROM campings WHERE actif = 1 ORDER BY nom ASC;")) {
+$campings = [];
+
+// Get all the active campings ordered by name
+if ($result = $mysqli->query("SELECT * FROM campings WHERE actif = 1 ORDER BY nom ASC")) {
+  // Fetch the results from the query and store them in the campings array
   $campings = $result->fetch_all(MYSQLI_ASSOC);
 }
-
 ?>
+
 
 <div class="min-h-screen flex justify-between">
   <!-- Include Sidebar -->

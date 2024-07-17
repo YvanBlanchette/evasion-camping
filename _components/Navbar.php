@@ -13,7 +13,9 @@ function formatTitle($title)
     "liste_campings" => "NOS CAMPINGS",
     "EditReview" => "Modifier un commentaire",
     "DeleteReview" => "Supprimer un commentaire",
-    "tableau_de_bord" => "Tableau de bord"
+    "tableau_de_bord" => "Tableau de bord",
+    "about" => "À propos",
+    "contact" => "Nous joindre",
   ];
 
   return $titles[$title] ?? $title;

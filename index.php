@@ -1,12 +1,13 @@
 <?php
-// Include Header
 include_once(__DIR__ . '/_components/Header.php');
 
 // Fetch the 8 most popular campings
-if ($result = $mysqli->query("SELECT * FROM campings WHERE actif = 1 ORDER BY popularite DESC LIMIT 8;")) {
+$campings = [];
+// Fetch all the active campings, sorted by popularity and limit the result to 8 
+if ($result = $mysqli->query("SELECT * FROM campings WHERE actif = 1 ORDER BY popularite DESC LIMIT 8")) {
+  // Store the result in the campings array
   $campings = $result->fetch_all(MYSQLI_ASSOC);
 }
-
 ?>
 
 <div class="min-h-screen flex justify-between">
@@ -23,9 +24,8 @@ if ($result = $mysqli->query("SELECT * FROM campings WHERE actif = 1 ORDER BY po
 
       <!-- Campings list -->
       <div class="flex flex-wrap justify-between">
-
         <?php foreach ($campings as $camping) { ?>
-          <!-- CARD -->
+          <!-- Camping card -->
           <div class="w-[250px] text-gray-900 rounded-[5px] m-[10px] bg-white shadow-xl">
             <img src="https://picsum.photos/id/<?= $camping['id_picsum'] ?>/250/122" alt="<?= $camping['nom'] ?>">
             <div class="px-4 pt-2 pb-4 flex flex-col items-center">
@@ -41,14 +41,14 @@ if ($result = $mysqli->query("SELECT * FROM campings WHERE actif = 1 ORDER BY po
                   <?php } ?>
                 </div>
               </div>
-              <a href="fiche_camping.php?id=<?= $camping['id'] ?>" class="bg-[#C7D1C3] hover:bg-[#738C69] px-3 py-1 rounded-sm uppercase font-medium text-sm tyransition-all duration-300">En savoir plus</a>
+              <a href="fiche_camping.php?id=<?= $camping['id'] ?>" class="bg-[#C7D1C3] hover:bg-[#738C69] px-3 py-1 rounded-sm uppercase font-medium text-sm transition-all duration-300">En savoir plus</a>
             </div>
           </div>
         <?php } ?>
       </div>
-
     </main>
+
+    <!-- Include Footer -->
     <?php include_once(__DIR__ . '/_components/Footer.php'); ?>
   </div>
-
 </div>

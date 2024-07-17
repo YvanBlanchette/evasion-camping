@@ -1,36 +1,64 @@
 <?php
-// Include Header
 include_once(__DIR__ . '/_components/Header.php');
 
-// Preparing the SQL query
-if ($request = $mysqli->prepare("SELECT * FROM campings WHERE id=?")) {
-        // Binding the parametres to the prepared query
-        $request->bind_param("i", $_GET['id']);
-        // Executing the query
-        $request->execute();
-        // Getting the results from the query
-        $result = $request->get_result();
-        // Fetching the associated data
-        $camping = $result->fetch_assoc();
-        // Closing the query
-        $request->close();
+$camping = [];
+$reviews = [];
+
+// Function to get the camping details
+function getCampingDetails($mysqli, $campingId)
+{
+        $camping = [];
+
+        // Query to get the camping details
+        if ($request = $mysqli->prepare("SELECT * FROM campings WHERE id=?")) {
+                // Bind the parameters to the prepared query
+                $request->bind_param("i", $campingId);
+                // Execute the query
+                $request->execute();
+                // Get the result of the query
+                $result = $request->get_result();
+                // Fetch the results and store them in the $camping array
+                $camping = $result->fetch_assoc();
+                // Close the query
+                $request->close();
+        }
+
+        return $camping;
 }
 
-// Preparing the SQL query
-if ($request2 = $mysqli->prepare("SELECT * FROM reviews WHERE camping_id = ?")) {
-        // Binding the parametres to the prepared query
-        $request2->bind_param("i", $_GET['id']);
-        // Executing the query
-        $request2->execute();
-        // Getting the results from the query
-        $result2 = $request2->get_result();
-        // Fetching the associated data
-        $reviews = $result2->fetch_all(MYSQLI_ASSOC);
-        // Closing the query
-        $request2->close();
+// Function to get the reviews for a camping
+function getReviewsForCamping($mysqli, $campingId)
+{
+        $reviews = [];
+
+        // Query to get the reviews for the camping
+        if ($request = $mysqli->prepare("SELECT * FROM reviews WHERE camping_id = ?")) {
+                // Bind the parameters to the prepared query
+                $request->bind_param("i", $campingId);
+                // Execute the query
+                $request->execute();
+                // Get the result of the query
+                $result = $request->get_result();
+                // Fetch the results and store them in the reviews array
+                $reviews = $result->fetch_all(MYSQLI_ASSOC);
+                // Close the query
+                $request->close();
+        }
+
+        return $reviews;
 }
 
+// Get the camping details and reviews
+$campingId = $_GET['id'] ?? 0;
+// If the camping ID is provided
+if ($campingId > 0) {
+        // Get the camping details
+        $camping = getCampingDetails($mysqli, $campingId);
+        // Get the reviews for the camping
+        $reviews = getReviewsForCamping($mysqli, $campingId);
+}
 ?>
+
 
 <div class="min-h-screen flex justify-between bg-gray-100">
         <!-- Include Sidebar -->
@@ -43,58 +71,81 @@ if ($request2 = $mysqli->prepare("SELECT * FROM reviews WHERE camping_id = ?")) 
                 <main class="">
                         <div class="mx-auto py-16 px-20 bg-gray-100 w-full flex-1 flex justify-center  gap-10">
 
+                                <!-- Image -->
                                 <div>
-                                        <img src="https://picsum.photos/id/<?= $camping['id_picsum'] ?>/300/300" alt="<?= $camping['nom'] ?>" class="min-w-[300px]">
+                                        <img src="https://picsum.photos/id/<?= $camping['id_picsum'] ?? '' ?>/300/300" alt="<?= $camping['nom'] ?? 'Évasion Camping' ?>" class="min-w-[300px]">
                                 </div>
 
                                 <div>
-                                        <!-- Title with camping's name -->
-                                        <h1 class="text-3xl uppercase "><?= $camping['nom'] ?></h1>
-                                        <div class="mb-2 flex gap-4 ">
+                                        <!-- Title with the camping's name -->
+                                        <h1 class="text-3xl uppercase"><?= $camping['nom'] ?? 'Évasion Camping' ?></h1>
+
+                                        <div class="mb-2 flex gap-4">
+                                                <!-- Number of Stars -->
                                                 <div>
-                                                        <?php for ($i = 0; $i < $camping['nb_etoiles']; $i++) { ?>
-                                                                <i class="fa-solid fa-star text-[#E28F20]"></i>
-                                                        <?php } ?>
+                                                        <?php
+                                                        if (isset($camping['nb_etoiles'])) {
+                                                                for ($i = 0; $i < $camping['nb_etoiles']; $i++) {
+                                                                        echo '<i class="fa-solid fa-star text-[#E28F20]"></i>';
+                                                                }
+                                                        }
+                                                        ?>
                                                 </div>
+
+                                                <!-- Region -->
                                                 <div class="text-sm">
                                                         <i class="fa-solid fa-location-dot"></i>
-                                                        <span><?= $camping['region'] ?></span>
+                                                        <span><?= $camping['region'] ?? '' ?></span>
                                                 </div>
                                         </div>
-                                        <ul class="mb-3 ">
+                                        <ul class="mb-3">
+                                                <!-- Address -->
                                                 <li>
-                                                        <p class=" "><?= $camping['adresse'] ?>,</p>
-                                                        <p class="leading-none "><?= $camping['ville'] ?>, Québec</p>
-                                                        <p class="leading-none mb-4 "><?= $camping['code_postal'] ?></p>
+                                                        <p><?= $camping['adresse'] ?? '123, rue principale' ?>,</p>
+                                                        <p class="leading-none"><?= $camping['ville'] ?? 'BananaVille' ?>, Québec</p>
+                                                        <p class="mb-4"><?= $camping['code_postal'] ?? 'B4N 4N4' ?></p>
                                                 </li>
+                                                <!-- Number of terrains -->
                                                 <li>
-                                                        <p><span class="font-medium ">Nombres de terrains:</span> <?= $camping['nb_terrains'] ?> terrains</p>
+                                                        <p><span class="font-medium">Nombres de terrains:</span> <?= $camping['nb_terrains'] ?? '0' ?> terrains</p>
                                                 </li>
+                                                <!-- Accepts animals -->
                                                 <li>
-                                                        <p><span class="font-medium ">Accepte les animaux:</span> <?= $camping['accepte_animaux'] == '1' ?  "Oui" :  "Non" ?></p>
+                                                        <p><span class="font-medium">Accepte les animaux:</span> <?= $camping['accepte_animaux'] == '1' ?  "Oui" :  "Non" ?></p>
                                                 </li>
+                                                <!-- Experience -->
                                                 <li>
-                                                        <p><span class="font-medium ">Type d'expérience:</span> <?php switch ($camping['experience_id']) {
-                                                                                                                        case "1":
-                                                                                                                                echo "Tranquilité";
-                                                                                                                                break;
-                                                                                                                        case "2":
-                                                                                                                                echo "Activités sportives";
-                                                                                                                                break;
-                                                                                                                        case "3":
-                                                                                                                                echo "Hivernal";
-                                                                                                                                break;
-                                                                                                                        case "4":
-                                                                                                                                echo "Camping en tente";
-                                                                                                                                break;
-                                                                                                                        case "5":
-                                                                                                                                echo "Prêts à camper";
-                                                                                                                                break;
-                                                                                                                } ?></p>
+                                                        <p><span class="font-medium">Type d'expérience:</span>
+                                                                <?php
+                                                                //  If the experience ID is provided
+                                                                if (isset($camping['experience_id'])) {
+                                                                        //  Display the corresponding experience name
+                                                                        switch ($camping['experience_id']) {
+                                                                                case "1":
+                                                                                        echo "Tranquilité";
+                                                                                        break;
+                                                                                case "2":
+                                                                                        echo "Activités sportives";
+                                                                                        break;
+                                                                                case "3":
+                                                                                        echo "Hivernal";
+                                                                                        break;
+                                                                                case "4":
+                                                                                        echo "Camping en tente";
+                                                                                        break;
+                                                                                case "5":
+                                                                                        echo "Prêts à camper";
+                                                                                        break;
+                                                                        }
+                                                                }
+                                                                ?>
+                                                        </p>
                                                 </li>
                                         </ul>
+
+                                        <!-- Description -->
                                         <div>
-                                                <p><?= $camping['description'] ?></p>
+                                                <p><?= $camping['description'] ?? 'Description du camping' ?></p>
                                         </div>
                                 </div>
 
@@ -109,7 +160,7 @@ if ($request2 = $mysqli->prepare("SELECT * FROM reviews WHERE camping_id = ?")) 
                                         <article class="relative bg-gray-100 rounded-md w-[85%] mx-auto p-4 ps-16 pe-8 my-3 shadow-xl">
                                                 <div class="flex justify-between">
                                                         <!-- Review Username -->
-                                                        <h3 class="text-xl"><?= $review['username'] ?></h3>
+                                                        <h3 class="text-xl"><?= $review['username'] ?? '' ?></h3>
                                                         <!-- If user is ADMIN, display edit and delete buttons -->
                                                         <?php if ($ADMIN) { ?>
                                                                 <div class="text-lg px-2 py-1 flex gap-3">
@@ -130,13 +181,15 @@ if ($request2 = $mysqli->prepare("SELECT * FROM reviews WHERE camping_id = ?")) 
                                                         </span>
                                                         <!-- Visit Date -->
                                                         <span class="text-xs text-gray-500">
-                                                                <?= $review['date'] ?>
+                                                                <?= $review['date'] ?? '' ?>
                                                         </span>
                                                 </p>
                                                 <!-- Review -->
-                                                <p><?= $review['review'] ?></p>
+                                                <p><?= $review['review'] ?? '' ?></p>
                                         </article>
                                 <?php } ?>
+
+                                <!-- Leave a Review Form -->
                                 <article class="bg-gray-100 rounded-md w-[85%] mx-auto p-4 px-16 my-3 mt-8 shadow-xl">
                                         <h3 class="text-2xl uppercase text-center  my-4">Comment avez-vous apprécié votre visite?</h3>
                                         <?php include_once(__DIR__ . '/_components/ReviewForm.php') ?>
