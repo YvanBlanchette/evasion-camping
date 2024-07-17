@@ -38,31 +38,45 @@ if ($result = $mysqli->query("SELECT * FROM experiences ORDER BY id ASC")) {
         <h2 class="text-2xl text-center uppercase mb-1">Liste des campings</h2>
         <a href="AddCamping.php" class="text-center font-medium uppercase mb-3 flex items-center justify-center gap-2 text-[#E28F20] hover:text-[#E28F20]/70 transition-all duration-300 w-fit mx-auto"><i class="fa-solid fa-plus"></i> Ajouter un camping</a>
         <table class="w-full text-center shadow-xl">
-          <thead>
+          <thead class="">
             <tr class="bg-[#738C69]/40">
-              <th class="font-medium">ID</th>
+              <th class="font-medium pl-6">ID</th>
               <th class="font-medium">Nom</th>
               <th class="font-medium">Adresse</th>
               <th class="font-medium">Terrains</th>
               <th class="font-medium">Étoiles</th>
               <th class="font-medium">Animaux</th>
               <th class="font-medium">Statut</th>
-              <th></th>
+              <th class="pr-4"></th>
             </tr>
           </thead>
           <tbody>
             <?php foreach ($campings as $index => $camping) { ?>
-              <tr class="<?= $index % 2 == 1 ? 'bg-[#738C69]/20' : '' ?>">
-                <td><?= $camping['id'] ?></td>
-                <td><?= $camping['nom'] ?></td>
-                <td><?= "{$camping['adresse']}, {$camping['ville']}, {$camping['code_postal']}, Qc" ?></td>
-                <td><?= $camping['nb_terrains'] ?></td>
-                <td><?= $camping['nb_etoiles'] ?></td>
-                <td><?= $camping['accepte_animaux'] == '1' ? "Oui" : "Non" ?></td>
-                <td><?= $camping['actif'] == '1' ? "Actif" : "Inactif" ?></td>
-                <td class="flex justify-center items-center gap-2">
-                  <a href="fiche_camping.php?id=<?= $camping['id'] ?>" title="Voir" class="text-[#738C69] hover:text-[#738C69]/70 transition-all duration-300"><i class="fa-solid fa-eye"></i></a>
+              <tr class="<?= $index % 2 == 1 ? 'bg-[#738C69]/20' : '' ?> hover:bg-[#E28F20]/20 transition-all duration-300">
+                <td class="pl-6">
+                  <a href="fiche_camping.php?id=<?= $camping['id'] ?>" class="block w-full h-full"><?= $camping['id'] ?></a>
+                </td>
+                <td>
+                  <a href="fiche_camping.php?id=<?= $camping['id'] ?>" class="block w-full h-full"><?= $camping['nom'] ?></a>
+                </td>
+                <td>
+                  <a href="fiche_camping.php?id=<?= $camping['id'] ?>" class="block w-full h-full"><?= "{$camping['adresse']}, {$camping['ville']}, {$camping['code_postal']}, Qc" ?></a>
+                </td>
+                <td>
+                  <a href="fiche_camping.php?id=<?= $camping['id'] ?>" class="block w-full h-full"><?= $camping['nb_terrains'] ?></a>
+                </td>
+                <td>
+                  <a href="fiche_camping.php?id=<?= $camping['id'] ?>" class="block w-full h-full"><?= $camping['nb_etoiles'] ?></a>
+                </td>
+                <td>
+                  <a href="fiche_camping.php?id=<?= $camping['id'] ?>" class="block w-full h-full"><?= $camping['accepte_animaux'] == '1' ? "Oui" : "Non" ?></a>
+                </td>
+                <td>
+                  <a href="fiche_camping.php?id=<?= $camping['id'] ?>" class="block w-full h-full"><?= $camping['actif'] == '1' ? "Actif" : "Inactif" ?></a>
+                </td>
+                <td class="flex justify-center items-center gap-2 pl-4 pr-4">
                   <a href="EditCamping.php?id=<?= $camping['id'] ?>" title="Modifier" class="text-[#738C69] hover:text-[#738C69]/70 transition-all duration-300"><i class="fa-solid fa-pen-to-square"></i></a>
+                  <a href="DeleteCamping.php?id=<?= $camping['id'] ?>" title="Supprimer" class="text-[#738C69] hover:text-[#738C69]/70 transition-all duration-300"><i class="fa-solid fa-trash"></i></a>
                 </td>
               </tr>
             <?php } ?>

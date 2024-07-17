@@ -71,12 +71,13 @@ function renderMenuItem($link, $pathname)
       <!-- Toggle for the user's role -->
       <form method="POST">
         <input type="hidden" name="toggle_role" value="1">
-        <button type="submit" class="text-3xl hover:text-[#E28F20] transition-all duration-300">
+        <button type="submit" class="text-3xl hover:text-[#E28F20] transition-all duration-300 flex flex-col justify-center items-center mx-auto">
           <?php if ($ADMIN) : ?>
             <i title="Administrateur" class="fa-solid fa-user-tie"></i>
           <?php else : ?>
             <i title="Utilisateur" class="fa-solid fa-user"></i>
           <?php endif; ?>
+          <small class="leading-none text-xs mt-1"><?= $ADMIN ? 'Administrateur' : 'Utilisateur' ?></small>
         </button>
       </form>
 
