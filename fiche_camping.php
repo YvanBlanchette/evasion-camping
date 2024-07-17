@@ -73,19 +73,19 @@ if ($campingId > 0) {
 
                                 <!-- Image -->
                                 <div>
-                                        <img src="https://picsum.photos/id/<?= $camping['id_picsum'] ?? '' ?>/300/300" alt="<?= $camping['nom'] ?? 'Évasion Camping' ?>" class="min-w-[300px]">
+                                        <img src="https://picsum.photos/id/<?= $camping['id_picsum'] ?? '' ?>/300/300" alt="<?= $camping['name'] ?? 'Évasion Camping' ?>" class="min-w-[300px]">
                                 </div>
 
                                 <div>
                                         <!-- Title with the camping's name -->
-                                        <h1 class="text-3xl uppercase"><?= $camping['nom'] ?? 'Évasion Camping' ?></h1>
+                                        <h1 class="text-3xl uppercase"><?= $camping['name'] ?? 'Évasion Camping' ?></h1>
 
                                         <div class="mb-2 flex gap-4">
                                                 <!-- Number of Stars -->
                                                 <div>
                                                         <?php
-                                                        if (isset($camping['nb_etoiles'])) {
-                                                                for ($i = 0; $i < $camping['nb_etoiles']; $i++) {
+                                                        if (isset($camping['nb_stars'])) {
+                                                                for ($i = 0; $i < $camping['nb_stars']; $i++) {
                                                                         echo '<i class="fa-solid fa-star text-[#E28F20]"></i>';
                                                                 }
                                                         }
@@ -101,17 +101,17 @@ if ($campingId > 0) {
                                         <ul class="mb-3">
                                                 <!-- Address -->
                                                 <li>
-                                                        <p><?= $camping['adresse'] ?? '123, rue principale' ?>,</p>
-                                                        <p class="leading-none"><?= $camping['ville'] ?? 'BananaVille' ?>, Québec</p>
-                                                        <p class="mb-4"><?= $camping['code_postal'] ?? 'B4N 4N4' ?></p>
+                                                        <p><?= $camping['address'] ?? '123, rue principale' ?>,</p>
+                                                        <p class="leading-none"><?= $camping['city'] ?? 'Bananacity' ?>, Québec</p>
+                                                        <p class="mb-4"><?= $camping['postal_code'] ?? 'B4N 4N4' ?></p>
                                                 </li>
                                                 <!-- Number of terrains -->
                                                 <li>
-                                                        <p><span class="font-medium">Nombres de terrains:</span> <?= $camping['nb_terrains'] ?? '0' ?> terrains</p>
+                                                        <p><span class="font-medium">Nombre de terrains:</span> <?= $camping['nb_terrains'] ?? '0' ?> terrains</p>
                                                 </li>
                                                 <!-- Accepts animals -->
                                                 <li>
-                                                        <p><span class="font-medium">Accepte les animaux:</span> <?= $camping['accepte_animaux'] == '1' ?  "Oui" :  "Non" ?></p>
+                                                        <p><span class="font-medium">Accepte les animaux:</span> <?= $camping['accept_animals'] == '1' ?  "Oui" :  "Non" ?></p>
                                                 </li>
                                                 <!-- Experience -->
                                                 <li>
@@ -164,10 +164,10 @@ if ($campingId > 0) {
                                                         <!-- If user is ADMIN, display edit and delete buttons -->
                                                         <?php if ($ADMIN) { ?>
                                                                 <div class="text-lg px-2 py-1 flex gap-3">
-                                                                        <a href="EditReview.php?id=<?= $review['review_id'] ?>" class="text-[#738C69] hover:text-[#738C69]/70 transition-all duration-300" title="Modifier">
+                                                                        <a href="edit_review.php?id=<?= $review['review_id'] ?>" class="text-[#738C69] hover:text-[#738C69]/70 transition-all duration-300" title="Modifier">
                                                                                 <i class="fa-solid fa-pen-to-square"></i>
                                                                         </a>
-                                                                        <a href="DeleteConfirmation.php?id=<?= $review['review_id'] ?>" class="text-[#738C69] hover:text-[#738C69]/70 transition-all duration-300" title="Supprimer">
+                                                                        <a href="delete_review.php?id=<?= $review['review_id'] ?>" class="text-[#738C69] hover:text-[#738C69]/70 transition-all duration-300" title="Supprimer">
                                                                                 <i class="fa-solid fa-trash"></i>
                                                                         </a>
                                                                 </div>

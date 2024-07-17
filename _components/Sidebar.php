@@ -18,7 +18,7 @@ $SOCIALS = [
 ];
 
 $ADMIN_LINKS = [
-  'tableau_de_bord.php', 'EditCamping.php', 'AddCamping.php', 'DeleteCamping.php', 'EditExperience.php', 'AddExperience.php'
+  'dashboard.php', 'EditCamping.php', 'AddCamping.php', 'DeleteCamping.php', 'EditExperience.php', 'AddExperience.php'
 ];
 
 function renderMenuItem($link, $pathname)
@@ -58,7 +58,7 @@ function renderMenuItem($link, $pathname)
         if ($ADMIN) {
           $adminLink = [
             'name' => 'Tableau de bord',
-            'href' => 'tableau_de_bord.php',
+            'href' => 'dashboard.php',
             'icon' => 'fa-solid fa-user-gear'
           ];
           echo renderMenuItem($adminLink, $pathname);

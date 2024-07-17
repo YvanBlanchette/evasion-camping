@@ -61,7 +61,7 @@ if (!$review) {
           <div class="flex items-center gap-4 mt-4">
             <a href="fiche_camping.php?id=<?= htmlspecialchars($review['camping_id']) ?>" class="px-4 py-1 hover:bg-[#99AB93] text-white bg-[#738C69] transition-all duration-300 cursor-pointer rounded-md">Retour</a>
 
-            <form action="/evasion-camping/_actions/delete_review.php" method="POST">
+            <form action="/evasion-camping/_actions/act-delete_review.php" method="POST">
               <input type="hidden" name="review_id" value="<?= $review['review_id'] ?>">
               <input type="hidden" name="camping_id" value="<?= $review['camping_id'] ?>">
               <input type="submit" value="Confirmer" class="px-4 py-1 bg-red-500 text-white hover:bg-red-600 transition-all duration-300 cursor-pointer rounded-md">

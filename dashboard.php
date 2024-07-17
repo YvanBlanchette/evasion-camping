@@ -36,7 +36,7 @@ if ($result = $mysqli->query("SELECT * FROM experiences ORDER BY id ASC")) {
       <!-- Camping list as table with action buttons -->
       <div class="w-full mx-auto bg-white">
         <h2 class="text-2xl text-center uppercase mb-1">Liste des campings</h2>
-        <a href="AddCamping.php" class="text-center font-medium uppercase mb-3 flex items-center justify-center gap-2 text-[#E28F20] hover:text-[#E28F20]/70 transition-all duration-300 w-fit mx-auto"><i class="fa-solid fa-plus"></i> Ajouter un camping</a>
+        <a href="create_camping.php" class="text-center font-medium uppercase mb-3 flex items-center justify-center gap-2 text-[#E28F20] hover:text-[#E28F20]/70 transition-all duration-300 w-fit mx-auto"><i class="fa-solid fa-plus"></i> Ajouter un camping</a>
         <table class="w-full text-center shadow-xl">
           <thead class="">
             <tr class="bg-[#738C69]/40">
@@ -57,26 +57,27 @@ if ($result = $mysqli->query("SELECT * FROM experiences ORDER BY id ASC")) {
                   <a href="fiche_camping.php?id=<?= $camping['id'] ?>" class="block w-full h-full"><?= $camping['id'] ?></a>
                 </td>
                 <td>
-                  <a href="fiche_camping.php?id=<?= $camping['id'] ?>" class="block w-full h-full"><?= $camping['nom'] ?></a>
+                  <a href="fiche_camping.php?id=<?= $camping['id'] ?>" class="block w-full h-full"><?= $camping['name'] ?></a>
                 </td>
                 <td>
-                  <a href="fiche_camping.php?id=<?= $camping['id'] ?>" class="block w-full h-full"><?= "{$camping['adresse']}, {$camping['ville']}, {$camping['code_postal']}, Qc" ?></a>
+                  <a href="fiche_camping.php?id=<?= $camping['id'] ?>" class="block w-full h-full"><?= "{$camping['address']}, {$camping['city']}, {$camping['postal_code']}, Qc" ?></a>
                 </td>
                 <td>
                   <a href="fiche_camping.php?id=<?= $camping['id'] ?>" class="block w-full h-full"><?= $camping['nb_terrains'] ?></a>
                 </td>
                 <td>
-                  <a href="fiche_camping.php?id=<?= $camping['id'] ?>" class="block w-full h-full"><?= $camping['nb_etoiles'] ?></a>
+                  <a href="fiche_camping.php?id=<?= $camping['id'] ?>" class="block w-full h-full"><?= $camping['nb_stars'] ?></a>
                 </td>
                 <td>
-                  <a href="fiche_camping.php?id=<?= $camping['id'] ?>" class="block w-full h-full"><?= $camping['accepte_animaux'] == '1' ? "Oui" : "Non" ?></a>
+                  <a href="fiche_camping.php?id=<?= $camping['id'] ?>" class="block w-full h-full"><?= $camping['accept_animals'] == '1' ? "Oui" : "Non" ?></a>
                 </td>
                 <td>
                   <a href="fiche_camping.php?id=<?= $camping['id'] ?>" class="block w-full h-full"><?= $camping['actif'] == '1' ? "Actif" : "Inactif" ?></a>
                 </td>
                 <td class="flex justify-center items-center gap-2 pl-4 pr-4">
-                  <a href="EditCamping.php?id=<?= $camping['id'] ?>" title="Modifier" class="text-[#738C69] hover:text-[#738C69]/70 transition-all duration-300"><i class="fa-solid fa-pen-to-square"></i></a>
-                  <a href="DeleteCamping.php?id=<?= $camping['id'] ?>" title="Supprimer" class="text-[#738C69] hover:text-[#738C69]/70 transition-all duration-300"><i class="fa-solid fa-trash"></i></a>
+                  <a href="edit_camping.php?id=<?= $camping['id'] ?>" title="Modifier" class="text-[#738C69] hover:text-[#738C69]/70 transition-all duration-300"><i class="fa-solid fa-pen-to-square"></i></a>
+
+                  <a href="delete_camping.php?id=<?= $camping['id'] ?>" title="Supprimer" class="text-[#738C69] hover:text-[#738C69]/70 transition-all duration-300"><i class="fa-solid fa-trash"></i></a>
                 </td>
               </tr>
             <?php } ?>
@@ -89,24 +90,26 @@ if ($result = $mysqli->query("SELECT * FROM experiences ORDER BY id ASC")) {
       <!-- Experience list as table with action buttons -->
       <div class="w-full mx-auto bg-white mb-10">
         <h2 class="text-2xl text-center uppercase mb-1">Liste des expériences</h2>
-        <a href="AddExperience.php" class="text-center font-medium uppercase mb-3 flex items-center justify-center gap-2 text-[#E28F20] hover:text-[#E28F20]/70 transition-all duration-300 w-fit mx-auto"><i class="fa-solid fa-plus"></i> Ajouter une expérience</a>
+        <a href="create_experience.php" class="text-center font-medium uppercase mb-3 flex items-center justify-center gap-2 text-[#E28F20] hover:text-[#E28F20]/70 transition-all duration-300 w-fit mx-auto"><i class="fa-solid fa-plus"></i> Ajouter une expérience</a>
         <table class="w-full text-center shadow-xl">
           <thead>
             <tr class="bg-[#738C69]/40">
-              <th class="font-medium">ID</th>
+              <th class="font-medium pl-6">ID</th>
               <th class="font-medium">Nom</th>
               <th class="font-medium">Description</th>
-              <th></th>
+              <th class="pr-6"></th>
             </tr>
           </thead>
           <tbody>
             <?php foreach ($experiences as $index => $experience) { ?>
               <tr class="<?= $index % 2 == 1 ? 'bg-[#738C69]/20' : '' ?>">
-                <td><?= $experience['id'] ?></td>
-                <td><?= $experience['nom'] ?></td>
+                <td class="pl-6"><?= $experience['id'] ?></td>
+                <td><?= $experience['name'] ?></td>
                 <td><?= $experience['description'] ?></td>
-                <td class="px-4 py-0">
-                  <a href="EditExperience.php?id=<?= $experience['id'] ?>" title="Modifier" class="text-[#738C69] hover:text-[#738C69]/70 transition-all duration-300"><i class="fa-solid fa-pen-to-square"></i></a>
+                <td class="px-4 py-0 pr-6 flex gap-2 items-center justify-end">
+                  <a href="edit_experience.php?id=<?= $experience['id'] ?>" title="Modifier" class="text-[#738C69] hover:text-[#738C69]/70 transition-all duration-300"><i class="fa-solid fa-pen-to-square"></i></a>
+
+                  <a href="delete_experience.php?id=<?= $experience['id'] ?>" title="Supprimer" class="text-[#738C69] hover:text-[#738C69]/70 transition-all duration-300"><i class="fa-solid fa-trash"></i></a>
                 </td>
               </tr>
             <?php } ?>

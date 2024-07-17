@@ -29,14 +29,14 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `campings` (
   `id` int NOT NULL,
-  `nom` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `region` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `nb_terrains` int NOT NULL,
   `popularite` int NOT NULL,
-  `nb_etoiles` int NOT NULL,
+  `nb_stars` int NOT NULL,
   `actif` tinyint(1) NOT NULL,
-  `accepte_animaux` tinyint(1) NOT NULL,
+  `accept_animals` tinyint(1) NOT NULL,
   `date_inscription` date NOT NULL,
   `experience_id` int NOT NULL,
   `id_picsum` int NOT NULL
@@ -46,7 +46,7 @@ CREATE TABLE `campings` (
 -- Déchargement des données de la table `campings`
 --
 
-INSERT INTO `campings` (`id`, `nom`, `region`, `description`, `nb_terrains`, `popularite`, `nb_etoiles`, `actif`, `accepte_animaux`, `date_inscription`, `experience_id`, `id_picsum`) VALUES
+INSERT INTO `campings` (`id`, `name`, `region`, `description`, `nb_terrains`, `popularite`, `nb_stars`, `actif`, `accept_animals`, `date_inscription`, `experience_id`, `id_picsum`) VALUES
 (1, 'Camping Havre de paix', 'Centre-du-Québec', 'Magnifique camping.... C\'est le camping le plus populaire, il devrait s\'afficher en premier sur la page d\'accueil. Il doit aussi apparaître dans la liste complète des campings, sur la liste des campings 3* et plus dans la liste des campings associés à l\'expérience Tranquilité', 25, 9999999, 5, 1, 1, '2023-06-01', 1, 28),
 (2, 'Camping INACTIF', 'Centre du Québec', 'Magnifique camping. Puisqu\'il est inactif, il ne doit s\'afficher à aucun endroit sur le site. ', 0, 9999999, 3, 0, 1, '2023-06-02', 1, 34),
 (3, 'Camping Sportif', 'Mauricie', 'Magnifique camping.... C\'est le camping le 2e plus populaire, il devrait s\'afficher en deuxième sur la page d\'accueil. Il doit aussi apparaître dans la liste complète des campings, sur la liste des campings 3* et plus dans la liste des campings associés à l\'expérience Activités sportives', 141, 9999998, 3, 1, 1, '2023-06-03', 2, 177),
@@ -68,7 +68,7 @@ INSERT INTO `campings` (`id`, `nom`, `region`, `description`, `nb_terrains`, `po
 (19, 'Camping #25', 'Région X', 'Ceci est la description du camping #19. Ses informations sont générées aléatoirement et diffèrent d\'une personne à l\'autre.', 0, 0, 0, 1, 0, '2024-01-01', 1, 324),
 (20, 'Camping #26', 'Région X', 'Ceci est la description du camping #20. Ses informations sont générées aléatoirement et diffèrent d\'une personne à l\'autre.', 0, 0, 0, 1, 0, '2024-01-01', 1, 324);
 
-UPDATE `campings` set nb_terrains = FLOOR(RAND()*(300-30+1)+30), nb_etoiles = FLOOR(RAND()*(5-1+1)+1), popularite = FLOOR(RAND()*(10000-2000+1)+2000), accepte_animaux = FLOOR(RAND()*(1-0+1)+0), date_inscription=CURDATE(), experience_id=FLOOR(RAND()*(5-1+1)+1) WHERE id > 10;
+UPDATE `campings` set nb_terrains = FLOOR(RAND()*(300-30+1)+30), nb_stars = FLOOR(RAND()*(5-1+1)+1), popularite = FLOOR(RAND()*(10000-2000+1)+2000), accept_animals = FLOOR(RAND()*(1-0+1)+0), date_inscription=CURDATE(), experience_id=FLOOR(RAND()*(5-1+1)+1) WHERE id > 10;
 
 -- --------------------------------------------------------
 
@@ -78,7 +78,7 @@ UPDATE `campings` set nb_terrains = FLOOR(RAND()*(300-30+1)+30), nb_etoiles = FL
 
 CREATE TABLE `experiences` (
   `id` int NOT NULL,
-  `nom` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -86,7 +86,7 @@ CREATE TABLE `experiences` (
 -- Déchargement des données de la table `experiences`
 --
 
-INSERT INTO `experiences` (`id`, `nom`, `description`) VALUES
+INSERT INTO `experiences` (`id`, `name`, `description`) VALUES
 (1, 'Tranquilité', ''),
 (2, 'Activités sportives', ''),
 (3, 'Hivernal', ''),

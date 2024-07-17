@@ -10,14 +10,14 @@ $experience_description = '';
 // If experience_id is provided
 if ($experience_id) {
   // Get the experience details
-  $experience_details = $mysqli->query("SELECT nom, description FROM experiences WHERE id = '$experience_id'");
+  $experience_details = $mysqli->query("SELECT name, description FROM experiences WHERE id = '$experience_id'");
 
   // If the experience is found
   if ($experience_details) {
     // Fetch the experience data
     $experience_data = $experience_details->fetch_assoc();
     // Set the experience name and description
-    $experience_name = $experience_data['nom'];
+    $experience_name = $experience_data['name'];
     $experience_description = $experience_data['description'];
   }
 
@@ -25,9 +25,9 @@ if ($experience_id) {
   $request = $mysqli->prepare("
         SELECT 
             campings.id AS id,
-            campings.nom AS nom, 
+            campings.name AS name, 
             campings.region AS region, 
-            campings.nb_etoiles AS nb_etoiles, 
+            campings.nb_stars AS nb_stars, 
             campings.id_picsum AS id_picsum,
             campings.description AS description
         FROM 
@@ -38,7 +38,7 @@ if ($experience_id) {
             campings.experience_id = ?
             AND campings.actif = 1 
         ORDER BY 
-            nom ASC
+            name ASC
     ");
 
   if ($request) {
@@ -79,11 +79,11 @@ if ($experience_id) {
               <div class="min-h-[200px] rounded-md bg-white shadow-xl flex">
                 <!-- IMAGE -->
                 <div class="w-1/4">
-                  <img class="w-[200px]  h-full rounded-l-md object-cover" src="https://picsum.photos/id/<?= $camping['id_picsum'] ?>/200/200" alt="<?= $camping['nom'] ?>">
+                  <img class="w-[200px]  h-full rounded-l-md object-cover" src="https://picsum.photos/id/<?= $camping['id_picsum'] ?>/200/200" alt="<?= $camping['name'] ?>">
                 </div>
                 <!-- DETAILS -->
                 <div class="w-3/4 px-6 pt-2 pb-4 flex flex-col">
-                  <h4 class="text-3xl"><?= $camping['nom'] ?></h4>
+                  <h4 class="text-3xl"><?= $camping['name'] ?></h4>
                   <!-- REGION/RATING -->
                   <div class="mb-2 flex items-center gap-3">
                     <div class="text-center text-sm">
@@ -91,7 +91,7 @@ if ($experience_id) {
                       <span><?= $camping['region'] ?></span>
                     </div>
                     <div class="text-center">
-                      <?php for ($i = 0; $i < $camping['nb_etoiles']; $i++) { ?>
+                      <?php for ($i = 0; $i < $camping['nb_stars']; $i++) { ?>
                         <i class="fa-solid fa-star text-sm text-[#E28F20]"></i>
                       <?php } ?>
                     </div>

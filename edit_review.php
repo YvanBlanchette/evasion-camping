@@ -33,7 +33,14 @@ if (!$review) {
 }
 
 // Preparing the SQL query to fetch campings list
-$res = $mysqli->query("SELECT * FROM campings ORDER BY nom ASC;");
+$res = $mysqli->query("SELECT * FROM campings ORDER BY name ASC;");
+$campings = $res->fetch_all(MYSQLI_ASSOC);
+
+// Checking if the query was successful
+if (!$res) {
+  echo "Erreur lors de la récupération des campings : " . $mysqli->error;
+  exit();
+}
 ?>
 
 <div class="min-h-screen flex justify-between bg-gray-100">
@@ -47,9 +54,9 @@ $res = $mysqli->query("SELECT * FROM campings ORDER BY nom ASC;");
     <main class="">
       <div class="mx-auto py-16 px-20 bg-gray-100 w-full flex-1 flex flex-col justify-center gap-10">
         <article class="bg-[#CDD4CC]/50 rounded-md w-[70%] mx-auto p-4 px-16 my-3 shadow-xl py-10">
-          <h1 class="text-2xl text-center uppercase font-semibold mb-4">Modifier un commentaire</h1>
+          <h1 class="text-4xl text-center uppercase font-semibold mb-4">Modifier un <span><span class="text-[#E28F20] font-bold">commentaire</span></h1>
 
-          <form method="POST" action="/evasion-camping/_actions/update_review.php" class="my-10">
+          <form method="POST" action="/evasion-camping/_actions/act-update_review.php" class="my-10">
             <input type="hidden" name="review_id" value="<?= htmlspecialchars($review['review_id']) ?>" hidden>
             <div class="flex justify-between items-center gap-10 mb-4">
               <!-- Date -->
@@ -58,7 +65,7 @@ $res = $mysqli->query("SELECT * FROM campings ORDER BY nom ASC;");
                 <input type="date" id="date" name="date" value="<?= htmlspecialchars($review['date']) ?>" class="px-2 py-1 bg-white" required>
               </div>
               <!-- Number of stars -->
-              <div class="flex flex-col gap-1 w-full text-end">
+              <div class="flex flex-col gap-1 w-[60%] text-end">
                 <label class="block" for="nb_stars">Nombre d'étoiles<span class="text-red-500"> *</span></label>
                 <select name="nb_stars" id="nb_stars" class="w-full text-end px-2 py-1 bg-white" required>
                   <?php
@@ -74,13 +81,13 @@ $res = $mysqli->query("SELECT * FROM campings ORDER BY nom ASC;");
               <!-- Camping visited -->
               <div class="flex flex-col gap-1 w-full text-end">
                 <label class="block" for="camping_id">Camping visité<span class="text-red-500"> *</span></label>
-                <select name="camping_id" id="camping_id" class="w-full text-end px-2 py-1 bg-white" required>
+                <select disabled name="camping_id" id="camping_id" class="w-full text-end px-2 py-1 bg-white" required>
                   <?php
                   // Loop through the campings and populate the options
-                  while ($camping = $res->fetch_assoc()) {
+                  foreach ($campings as $camping) {
                     // Check if current camping matches the review's camping_id, select it
                     $selected = ($camping['id'] == $review['camping_id']) ? 'selected' : '';
-                    echo "<option value='{$camping['id']}' $selected>" . htmlspecialchars($camping['nom']) . "</option>";
+                    echo "<option value='{$camping['id']}' $selected>" . htmlspecialchars($camping['name']) . "</option>";
                   }
                   ?>
                 </select>

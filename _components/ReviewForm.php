@@ -1,8 +1,8 @@
 <?php
-$res = $mysqli->query("SELECT * FROM campings ORDER BY nom ASC;");
+$res = $mysqli->query("SELECT * FROM campings ORDER BY name ASC;");
 ?>
 
-<form method="POST" action="/evasion-camping/_actions/create_review.php" class="my-10">
+<form method="POST" action="/evasion-camping/_actions/act-create_review.php" class="my-10">
   <div class="flex justify-between items-center gap-10 mb-4">
     <!-- Date -->
     <div class="flex flex-col gap-1 text-end">
@@ -25,7 +25,7 @@ $res = $mysqli->query("SELECT * FROM campings ORDER BY nom ASC;");
       <label class="block" for="camping_id">Camping visité<span class="text-red-500"> *</span></label>
       <select name="camping_id" id="camping_id" class="w-full text-end px-2 py-1" required>
         <?php while ($camping = $res->fetch_assoc()) { ?>
-          <option value="<?= htmlspecialchars($camping['id']) ?>" class="text-end px-2"><?= htmlspecialchars($camping['nom']) ?></option>
+          <option value="<?= htmlspecialchars($camping['id']) ?>" class="text-end px-2"><?= htmlspecialchars($camping['name']) ?></option>
         <?php } ?>
       </select>
     </div>

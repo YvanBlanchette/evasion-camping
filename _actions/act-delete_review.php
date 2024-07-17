@@ -3,14 +3,9 @@ include_once('../include/config.php');
 
 // Verify that the form has been submitted and the review ID is set
 if (isset($_POST['review_id'])) {
-  // Connect to the database
-  $mysqli = new mysqli($host, $username, $password, $database);
 
-  // Check connection
-  if ($mysqli->connect_errno) {
-    echo 'Échec de connexion à la base de données MySQL: ' . $mysqli->connect_error;
-    exit();
-  }
+  // Connect to the database
+  include_once('../include/db.php');
 
   // Prepare the DELETE SQL Query
   if ($request = $mysqli->prepare("DELETE FROM reviews WHERE review_id = ?")) {

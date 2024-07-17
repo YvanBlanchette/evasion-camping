@@ -8,8 +8,8 @@ $campings = [];
 if ($result = $mysqli->query("
     SELECT * FROM campings 
     WHERE actif = 1 
-    AND nb_etoiles >= 3 
-    ORDER BY nom ASC
+    AND nb_stars >= 3 
+    ORDER BY name ASC
 ")) {
   // fetch the results from the query and store them in the campings array
   $campings = $result->fetch_all(MYSQLI_ASSOC);
@@ -38,11 +38,11 @@ if ($result = $mysqli->query("
               <div class="min-h-[200px] rounded-md bg-white shadow-xl flex">
                 <!-- IMAGE -->
                 <div class="w-1/5">
-                  <img class="w-[200px]  h-full rounded-l-md object-cover" src="https://picsum.photos/id/<?= $camping['id_picsum'] ?>/200/200" alt="<?= $camping['nom'] ?>">
+                  <img class="w-[200px]  h-full rounded-l-md object-cover" src="https://picsum.photos/id/<?= $camping['id_picsum'] ?>/200/200" alt="<?= $camping['name'] ?>">
                 </div>
                 <!-- NAME -->
                 <div class="w-4/5 px-6 pt-2 pb-4 flex flex-col">
-                  <h4 class="text-3xl"><?= $camping['nom'] ?></h4>
+                  <h4 class="text-3xl"><?= $camping['name'] ?></h4>
                   <!-- REGION/RATING -->
                   <div class="mb-2 flex items-center gap-3">
                     <div class="text-center text-sm">
@@ -50,7 +50,7 @@ if ($result = $mysqli->query("
                       <span><?= $camping['region'] ?></span>
                     </div>
                     <div class="text-center">
-                      <?php for ($i = 0; $i < $camping['nb_etoiles']; $i++) { ?>
+                      <?php for ($i = 0; $i < $camping['nb_stars']; $i++) { ?>
                         <i class="fa-solid fa-star text-sm text-[#E28F20]"></i>
                       <?php } ?>
                     </div>

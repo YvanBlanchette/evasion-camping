@@ -27,16 +27,16 @@ if ($result = $mysqli->query("SELECT * FROM campings WHERE actif = 1 ORDER BY po
         <?php foreach ($campings as $camping) { ?>
           <!-- Camping card -->
           <div class="w-[250px] text-gray-900 rounded-[5px] m-[10px] bg-white shadow-xl">
-            <img src="https://picsum.photos/id/<?= $camping['id_picsum'] ?>/250/122" alt="<?= $camping['nom'] ?>">
+            <img src="https://picsum.photos/id/<?= $camping['id_picsum'] ?>/250/122" alt="<?= $camping['name'] ?>">
             <div class="px-4 pt-2 pb-4 flex flex-col items-center">
-              <h4 class="a-programmer"><?= $camping['nom'] ?></h4>
+              <h4 class="a-programmer"><?= $camping['name'] ?></h4>
               <div class="mb-2">
                 <div class="text-center text-sm">
                   <i class="fa-solid fa-location-dot"></i>
                   <span><?= $camping['region'] ?></span>
                 </div>
                 <div class="text-center">
-                  <?php for ($i = 0; $i < $camping['nb_etoiles']; $i++) { ?>
+                  <?php for ($i = 0; $i < $camping['nb_stars']; $i++) { ?>
                     <i class="fa-solid fa-star text-sm text-[#E28F20]"></i>
                   <?php } ?>
                 </div>

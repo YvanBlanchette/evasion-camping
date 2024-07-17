@@ -11,11 +11,13 @@ function formatTitle($title)
     "liste_campings_par_experience" => "NOS CAMPINGS",
     "fiche_camping" => "NOS CAMPINGS",
     "liste_campings" => "NOS CAMPINGS",
-    "EditReview" => "Modifier un commentaire",
-    "DeleteReview" => "Supprimer un commentaire",
-    "tableau_de_bord" => "Tableau de bord",
+    "edit_review" => "Modifier un commentaire",
+    "delete_review" => "Supprimer un commentaire",
+    "dashboard" => "Tableau de bord",
     "about" => "À propos",
     "contact" => "Nous joindre",
+    "edit_camping" => "Modifier un camping",
+    "create_experience" => "Ajouter une expérience",
   ];
 
   return $titles[$title] ?? $title;
@@ -76,7 +78,7 @@ if (isset($_POST['toggle_role'])) {
         <select name="experience_id" id="experiences" onchange="this.form.submit()" class="text-sm cursor-pointer">
           <option disabled selected>Sélectionnez une expérience</option>
           <?php foreach ($experiences as $exp) : ?>
-            <option value="<?= $exp['id'] ?>"><?= $exp['nom'] ?></option>
+            <option value="<?= $exp['id'] ?>"><?= $exp['name'] ?></option>
           <?php endforeach; ?>
         </select>
       </form>
