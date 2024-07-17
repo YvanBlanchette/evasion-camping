@@ -65,10 +65,10 @@ function renderMenuItem($link, $pathname)
     </nav>
 
     <nav class="text-center">
-      <!-- Toggle the user's role -->
+      <!-- Toggle for the user's role -->
       <form method="POST">
         <input type="hidden" name="toggle_role" value="1">
-        <button type="submit" class="text-3xl text-[#2E5333] hover:text-[#E28F20] transition-all duration-300">
+        <button type="submit" class="text-3xl hover:text-[#E28F20] transition-all duration-300">
           <?php if ($ADMIN) : ?>
             <i title="Administrateur" class="fa-solid fa-user-tie"></i>
           <?php else : ?>
