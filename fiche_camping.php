@@ -164,10 +164,10 @@ if ($campingId > 0) {
                                                         <!-- If user is ADMIN, display edit and delete buttons -->
                                                         <?php if ($ADMIN) { ?>
                                                                 <div class="text-lg px-2 py-1 flex gap-3">
-                                                                        <a href="edit_review.php?id=<?= $review['review_id'] ?>" class="text-[#738C69] hover:text-[#738C69]/70 transition-all duration-300" title="Modifier">
+                                                                        <a href="edit_review.php?id=<?= $review['id'] ?>" class="text-[#738C69] hover:text-[#738C69]/70 transition-all duration-300" title="Modifier">
                                                                                 <i class="fa-solid fa-pen-to-square"></i>
                                                                         </a>
-                                                                        <a href="delete_review.php?id=<?= $review['review_id'] ?>" class="text-[#738C69] hover:text-[#738C69]/70 transition-all duration-300" title="Supprimer">
+                                                                        <a href="delete_review.php?id=<?= $review['id'] ?>" class="text-[#738C69] hover:text-[#738C69]/70 transition-all duration-300" title="Supprimer">
                                                                                 <i class="fa-solid fa-trash"></i>
                                                                         </a>
                                                                 </div>

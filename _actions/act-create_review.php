@@ -1,7 +1,5 @@
 <?php
-include_once('../include/config.php');
-
-// Verifying the form has been submitted andrequired fields have been set
+// Verifying the form is submitted and all required fields are set
 if (
   isset($_POST['username']) &&
   isset($_POST['date']) &&
@@ -11,27 +9,27 @@ if (
   isset($_POST['review'])
 ) {
 
-  // Connect to the database
+  // Connecting to the database
   include_once('../include/db.php');
 
-  // Prepare the CREATE SQL query
+  // Preparing the CREATE SQL query
   $sql = "INSERT INTO reviews (camping_id, username, email, date, nb_stars, review) VALUES (?, ?, ?, ?, ?, ?)";
 
   if ($stmt = $mysqli->prepare($sql)) {
-    // Bind parameters to the prepared statement
-    $stmt->bind_param(
-      "isssis",
-      $_POST['camping_id'],
-      $_POST['username'],
-      $_POST['email'],
-      $_POST['date'],
-      $_POST['nb_stars'],
-      $_POST['review']
-    );
+    // SQL injection (XSS) protection 
+    $username = htmlspecialchars($_POST['username']);
+    $date = htmlspecialchars($_POST['date']);
+    $nb_stars = (int)$_POST['nb_stars'];
+    $camping_id = (int)$_POST['camping_id'];
+    $email = htmlspecialchars($_POST['email']);
+    $review = htmlspecialchars($_POST['review']);
 
-    // Execute the query
+    // Binding the parameters to the prepared statement
+    $stmt->bind_param("isssis", $camping_id, $username, $email, $date, $nb_stars,  $review);
+
+    // Executing the query
     if ($stmt->execute()) {
-      // Redirect to the camping page 
+      // Redirecting to the camping page 
       header("Location: /evasion-camping/fiche_camping.php?id=" . $_POST['camping_id']);
       exit();
     } else {

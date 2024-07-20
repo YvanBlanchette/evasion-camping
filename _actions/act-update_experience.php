@@ -1,33 +1,36 @@
 <?php
-// Include necessary files
-include_once('../include/config.php');
-
-// Verify that the form has been submitted and all required fields are set
+// Verifying that the form is submitted and all required fields are set
 if (isset($_POST['id'], $_POST['name'], $_POST['description'])) {
 
-  // Connect to the database
+  // Connecting to the database
   include_once('../include/db.php');
 
-  // Prepare the UPDATE SQL Query
+  // Preparing the UPDATE SQL Query
   if ($request = $mysqli->prepare("UPDATE experiences SET name=?, description=? WHERE id=?")) {
-    // Bind the parameters to the prepared query
-    $request->bind_param("ssi", $_POST['name'], $_POST['description'], $_POST['id']);
 
-    // Execute the query
+    // SQL injection (XSS) protection
+    $name = htmlspecialchars($_POST['name']);
+    $description = htmlspecialchars($_POST['description']);
+    $id = (int)$_POST['id'];
+
+    // Binding the parameters to the prepared query
+    $request->bind_param("ssi", $name, $description, $id);
+
+    // Executing the query
     if ($request->execute()) {
-      // Redirect to the camping page or wherever appropriate
+      // Redirecting to the cdaqshboard after the update
       header("Location: /evasion-camping/dashboard.php");
-      exit(); // Ensure no further code is executed after redirection
+      exit();
     } else {
       echo "Erreur lors de la mise à jour : " . $mysqli->error;
     }
 
-    // Close the query
+    // Closing the query
     $request->close();
   } else {
     echo "Erreur de préparation de la requête : " . $mysqli->error;
   }
 
-  // Close the database connection
+  // Closing the database connection
   $mysqli->close();
 }

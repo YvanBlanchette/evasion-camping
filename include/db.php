@@ -1,4 +1,7 @@
 <?php
+// include the configuration parameters
+include_once('../include/config.php');
+
 // Connection to the database
 $mysqli = new mysqli($host, $username, $password, $database);
 

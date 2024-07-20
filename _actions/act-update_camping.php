@@ -1,7 +1,5 @@
 <?php
-include_once('../include/config.php');
-
-// Verify that the form has been submitted and all required fields are set
+// Verifying that the form is submitted and all required fields are set (since there is a lot of fields to validate, I used a foreach loop to validate all required fields)
 $required_fields = ['id', 'name', 'region', 'address', 'city', 'postal_code', 'description', 'nb_terrains', 'popularite', 'nb_stars', 'actif', 'date_inscription', 'experience_id', 'id_picsum'];
 foreach ($required_fields as $field) {
   if (!isset($_POST[$field])) {
@@ -10,14 +8,14 @@ foreach ($required_fields as $field) {
   }
 }
 
-// Connect to the database
+// Connecting to the database
 include_once('../include/db.php');
 
-// Prepare the UPDATE SQL query
+// Preparing the UPDATE SQL query
 $sql = "UPDATE campings SET name=?, region=?, address=?, city=?, postal_code=?, description=?, nb_terrains=?, popularite=?, nb_stars=?, actif=?, accept_animals=?, date_inscription=?, experience_id=?, id_picsum=? WHERE id=?";
 
 if ($stmt = $mysqli->prepare($sql)) {
-  // SQL injection (XSS) protection by escaping user inputs
+  // SQL injection (XSS) protection
   $id = (int)$_POST['id'];
   $name = htmlspecialchars($_POST['name']);
   $region = htmlspecialchars($_POST['region']);
@@ -34,23 +32,23 @@ if ($stmt = $mysqli->prepare($sql)) {
   $experience_id = (int)$_POST['experience_id'];
   $id_picsum = (int)$_POST['id_picsum'];
 
-  // Bind parameters to the prepared statement
+  // Binding parameters to the prepared statement
   $stmt->bind_param('ssssssiiiiisiii', $name, $region, $address, $city, $postal_code, $description, $nb_terrains, $popularite, $nb_stars, $actif, $accept_animals, $date_inscription, $experience_id, $id_picsum, $id);
 
-  // Execute the query
+  // Executing the query
   if ($stmt->execute()) {
-    // Redirect to dashboard after update
+    // Redirecting to dashboard after update
     header("Location: /evasion-camping/dashboard.php");
     exit();
   } else {
-    echo 'Error executing query: ' . $stmt->error;
+    echo "Erreur lors de la mise à jour : " . $stmt->error;
   }
 
-  // Close the prepared statement
+  // Closing the prepared statement
   $stmt->close();
 } else {
-  echo 'Error preparing statement: ' . $mysqli->error;
+  echo 'Erreur de préparation de la requête: ' . $mysqli->error;
 }
 
-// Close the database connection
+// Closing the database connection
 $mysqli->close();

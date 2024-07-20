@@ -8,15 +8,15 @@ if (!isset($_GET['id'])) {
   exit();
 }
 
-// Preparing the SQL query to fetch the review data
-if ($request = $mysqli->prepare("SELECT * FROM reviews WHERE review_id=?")) {
+// Preparing the SQL query to get the review data
+if ($request = $mysqli->prepare("SELECT * FROM reviews WHERE id=?")) {
   // Binding parameters to the prepared query
   $request->bind_param("i", $_GET['id']);
   // Query execution
   $request->execute();
   // Get the results from the query
   $result = $request->get_result();
-  // Fetch the associated data
+  // Fetch the associated review data
   $review = $result->fetch_assoc();
   // Closing the query
   $request->close();
@@ -57,7 +57,6 @@ if (!$res) {
           <h1 class="text-4xl text-center uppercase font-semibold mb-4">Modifier un <span><span class="text-[#E28F20] font-bold">commentaire</span></h1>
 
           <form method="POST" action="/evasion-camping/_actions/act-update_review.php" class="my-10">
-            <input type="hidden" name="review_id" value="<?= htmlspecialchars($review['review_id']) ?>" hidden>
             <div class="flex justify-between items-center gap-10 mb-4">
               <!-- Date -->
               <div class="flex flex-col gap-1 text-end">
@@ -113,6 +112,7 @@ if (!$res) {
             </div>
             <div class="flex items-center gap-4 mt-4 justify-end">
               <a href="fiche_camping.php?id=<?= htmlspecialchars($review['camping_id']) ?>" class="px-4 py-1 hover:bg-[#99AB93] text-white bg-[#738C69] transition-all duration-300 cursor-pointer rounded-md">Retour</a>
+              <input type="hidden" name="id" value="<?= htmlspecialchars($review['id']) ?>" hidden>
               <input type="submit" value="Modifier" class="px-4 py-1 hover:bg-[#E28F20]/80 text-white bg-[#E28F20] transition-all duration-300 cursor-pointer rounded-md">
             </div>
           </form>

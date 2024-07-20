@@ -1,32 +1,30 @@
 <?php
-include_once('../include/config.php');
+// Verifying that the form is submitted and that the review ID is set
+if (isset($_POST['id'])) {
 
-// Verify that the form has been submitted and the review ID is set
-if (isset($_POST['review_id'])) {
-
-  // Connect to the database
+  // Connecting to the database
   include_once('../include/db.php');
 
-  // Prepare the DELETE SQL Query
-  if ($request = $mysqli->prepare("DELETE FROM reviews WHERE review_id = ?")) {
-    // Bind the review_id parameter to the prepared query
-    $request->bind_param("i", $_POST['review_id']);
+  // Preparing the DELETE SQL Query
+  if ($request = $mysqli->prepare("DELETE FROM reviews WHERE id = ?")) {
+    // Binding the review ID parameter to the prepared query
+    $request->bind_param("i", $_POST['id']);
 
-    // Execute the query
+    // Executing the query
     if ($request->execute()) {
-      // Redirect to another page after deletion
+      // Redirecting to the camping page after deletion
       header("Location: /evasion-camping/fiche_camping.php?id=" . $_POST['camping_id']);
       exit();
     } else {
-      echo "<div class='alert alert-danger'>Une erreur s'est produite. Svp réessayer !</div>";
+      echo 'Erreur lors de l\'exécution de la requête: ' . $request->error;
     }
 
-    // Close the query
+    // Closing the query
     $request->close();
   } else {
     echo $mysqli->error;
   }
 
-  // Close the database connection
+  // Closing the database connection
   $mysqli->close();
 }

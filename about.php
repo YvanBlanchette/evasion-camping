@@ -17,12 +17,12 @@ include_once(__DIR__ . '/_components/Header.php');
           <img src="images/about.jpg" alt="Camping sauvage" class="max-w-full h-auto mx-auto">
         </div>
 
-        <p class="text-lg mb-4">Bienvenue sur Évasion Camping, votre guide ultime pour découvrir le camping sauvage à travers le Québec. Nous sommes passionnés par la nature et nous nous engageons à vous offrir une expérience authentique et enrichissante au cœur des grands espaces.</p>
+        <p class="text-lg mb-6">Bienvenue sur Évasion Camping, votre guide ultime pour découvrir le camping sauvage à travers le Québec. Nous sommes passionnés par la nature et nous nous engageons à vous offrir une expérience authentique et enrichissante au cœur des grands espaces.</p>
 
         <h3 class="text-2xl font-semibold uppercase mb-2">Notre Mission</h3>
         <p class="text-lg mb-4">À Évasion Camping, notre mission est de promouvoir le camping sauvage tout en préservant et respectant l'environnement naturel du Québec. Nous croyons en l'importance de reconnecter avec la nature, en offrant des séjours qui permettent de découvrir la beauté des paysages québécois tout en conservant leur intégrité écologique.</p>
 
-        <ul class="mb-4 space-y-2">
+        <ul class="mb-6 space-y-2">
           <li class="text-lg"><span class="font-bold block">Exploration Authentique: </span>Nous vous invitons à explorer des terrains de camping soigneusement sélectionnés pour leur beauté naturelle et leur accès privilégié à des sites remarquables.</li>
           <li class="text-lg"><span class="font-bold block">Diversité de l'Expérience: </span>Que vous soyez un amateur de randonnée, un passionné de pêche, ou simplement à la recherche d'un lieu paisible pour vous ressourcer, Évasion Camping vous offre une variété d'expériences adaptées à vos besoins et à vos envies.</li>
           <li class="text-lg"><span class="font-bold block">Engagement Environnemental: </span>Nous sommes engagés dans la conservation de l'environnement. Chaque séjour chez Évasion Camping contribue à soutenir des pratiques durables et respectueuses de la nature.</li>

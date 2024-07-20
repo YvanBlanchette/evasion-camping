@@ -10,25 +10,14 @@ if ($result = $mysqli->query("SELECT * FROM experiences ORDER BY id ASC")) {
   $experiences = $result->fetch_all(MYSQLI_ASSOC);
 }
 
-$REGIONS = [
-  "Bas-Saint-Laurent",
-  "Saguenay-Lac-Saint-Jean",
-  "Capitale-Nationale",
-  "Mauricie",
-  "Estrie",
-  "Montréal",
-  "Outaouais",
-  "Abitibi-Témiscamingue",
-  "Côte-Nord",
-  "Nord-du-Québec",
-  "Gaspésie-Îles-de-la-Madeleine",
-  "Chaudiere-Appalaches",
-  "Laval",
-  "Lanaudière",
-  "Laurentides",
-  "Montérégie",
-  "Centre-du-Québec"
-]
+
+$regions = [];
+
+// Get all the regions ordered by id
+if ($result = $mysqli->query("SELECT * FROM regions ORDER BY id ASC")) {
+  // Fetch the results from the query and store them in the regions array
+  $regions = $result->fetch_all(MYSQLI_ASSOC);
+}
 ?>
 
 
@@ -57,8 +46,8 @@ $REGIONS = [
               <div class="flex flex-col gap-1 w-[60%]">
                 <label class="block" for="region">Région<span class="text-red-500"> *</span></label>
                 <select name="region" id="region" class="w-full text-end px-2 py-1 bg-white" required>
-                  <?php foreach ($REGIONS as $region) { ?>
-                    <option value="<?= htmlspecialchars($region) ?>" class="text-end px-2"><?= htmlspecialchars($region) ?></option>
+                  <?php foreach ($regions as $region) { ?>
+                    <option value="<?= htmlspecialchars($region['name']) ?>" class="text-end px-2"><?= htmlspecialchars($region['name']) ?></option>
                   <?php } ?>
                 </select>
               </div>
