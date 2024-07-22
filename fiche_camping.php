@@ -60,27 +60,28 @@ if ($campingId > 0) {
 ?>
 
 
-<div class="min-h-screen flex justify-between bg-gray-100">
-        <!-- Include Sidebar -->
-        <?php include_once(__DIR__ . '/_components/Sidebar.php'); ?>
+<div class="min-h-screen w-[100vw] flex justify-between">
+  <!-- Include Sidebar -->
+    <?php include_once(__DIR__ . '/_components/Sidebar.php') ?>
 
-        <div class="flex flex-col justify-between w-[80vw]">
-                <!-- Include Navbar -->
-                <?php include_once(__DIR__ . '/_components/Navbar.php'); ?>
+  <div class="flex flex-col justify-between w-[100vw] lg:w-[80vw]">
+    <!-- Include Navbar -->
+    <?php include_once(__DIR__ . '/_components/Navbar.php') ?>
 
-                <main class="">
-                        <div class="mx-auto py-16 px-20 bg-gray-100 w-full flex-1 flex justify-center  gap-10">
-
+    <main class="flex-1 py-12 px-[5vw] bg-gray-100">
+      <!-- Title -->
+      <h1 class="text-base sm:text-lg md:text-2xl lg:text-4xl font-light uppercase text-center mb-6">Fiche du <span class="text-[#E28F20] font-bold">camping</span></h1>
+                        <div class="flex justify-center">
                                 <!-- Image -->
-                                <div>
-                                        <img src="https://picsum.photos/id/<?= $camping['id_picsum'] ?? '' ?>/300/300" alt="<?= $camping['name'] ?? 'Évasion Camping' ?>" class="min-w-[300px]">
+                                <div class="hidden md:flex w-[45%] justify-center">
+                                        <img src="https://picsum.photos/id/<?= $camping['id_picsum'] ?? '' ?>/400/400" alt="<?= $camping['name'] ?? 'Évasion Camping' ?>" class="w-[350px]">
                                 </div>
 
-                                <div>
+                                <div class="w-[55%]">
                                         <!-- Title with the camping's name -->
-                                        <h1 class="text-3xl uppercase"><?= $camping['name'] ?? 'Évasion Camping' ?></h1>
+                                        <h1 class="text-xl md:text-3xl text-center md:text-start uppercase"><?= $camping['name'] ?? 'Évasion Camping' ?></h1>
 
-                                        <div class="mb-2 flex gap-4">
+                                        <div class="mb-2 flex gap-4 justify-center md:justify-start">
                                                 <!-- Number of Stars -->
                                                 <div>
                                                         <?php
@@ -98,11 +99,14 @@ if ($campingId > 0) {
                                                         <span><?= $camping['region'] ?? '' ?></span>
                                                 </div>
                                         </div>
-                                        <ul class="mb-3">
+                                        <div class="md:hidden">
+                                          <img src="https://picsum.photos/id/<?= $camping['id_picsum'] ?? '' ?>/300/300" alt="<?= $camping['name'] ?? 'Évasion Camping' ?>" class="min-w-[300px]">
+                                       </div>
+                                        <ul class="my-3">
                                                 <!-- Address -->
                                                 <li>
-                                                        <p><?= $camping['address'] ?? '123, rue principale' ?>,</p>
-                                                        <p class="leading-none"><?= $camping['city'] ?? 'Bananacity' ?>, Québec</p>
+                                                        <p><?= $camping['address'] ?? '1234, rue du bananier' ?>,</p>
+                                                        <p class="leading-none"><?= $camping['city'] ?? 'BananaVille' ?>, Québec</p>
                                                         <p class="mb-4"><?= $camping['postal_code'] ?? 'B4N 4N4' ?></p>
                                                 </li>
                                                 <!-- Number of terrains -->
@@ -150,24 +154,25 @@ if ($campingId > 0) {
                                 </div>
 
                         </div>
-
+                        </main>
+                        <main class="flex-1 py-12 px-[5vw] bg-[#738C69]/20">
                         <!-- Reviews -->
-                        <div class="mx-auto p-10 px-20 w-full bg-[#738C69]/20">
-                                <h2 class="text-3xl uppercase text-center mb-4">Commentaires de nos visiteurs</h2>
+                        <div class="mx-auto p-10 w-full">
+                                <h2 class="text-lg md:text-3xl uppercase text-center mb-4">Commentaires de nos visiteurs</h2>
 
                                 <?php foreach ($reviews as $review) { ?>
                                         <!-- Review cards -->
-                                        <article class="relative bg-gray-100 rounded-md w-[85%] mx-auto p-4 ps-16 pe-8 my-3 shadow-xl">
+                                        <article class="relative bg-gray-100 rounded-md  mx-auto p-8 md:ps-16 md:pe-8 my-3 shadow-xl">
                                                 <div class="flex justify-between">
                                                         <!-- Review Username -->
                                                         <h3 class="text-xl"><?= $review['username'] ?? '' ?></h3>
                                                         <!-- If user is ADMIN, display edit and delete buttons -->
                                                         <?php if ($ADMIN) { ?>
                                                                 <div class="text-lg px-2 py-1 flex gap-3">
-                                                                        <a href="edit_review.php?id=<?= $review['id'] ?>" class="text-[#738C69] hover:text-[#738C69]/70 transition-all duration-300" title="Modifier">
+                                                                        <a href="edit_review.php?id=<?= $review['review_id'] ?>" class="text-[#738C69] hover:text-[#738C69]/70 transition-all duration-300" title="Modifier">
                                                                                 <i class="fa-solid fa-pen-to-square"></i>
                                                                         </a>
-                                                                        <a href="delete_review.php?id=<?= $review['id'] ?>" class="text-[#738C69] hover:text-[#738C69]/70 transition-all duration-300" title="Supprimer">
+                                                                        <a href="delete_review.php?id=<?= $review['review_id'] ?>" class="text-[#738C69] hover:text-[#738C69]/70 transition-all duration-300" title="Supprimer">
                                                                                 <i class="fa-solid fa-trash"></i>
                                                                         </a>
                                                                 </div>
@@ -185,13 +190,13 @@ if ($campingId > 0) {
                                                         </span>
                                                 </p>
                                                 <!-- Review -->
-                                                <p><?= $review['review'] ?? '' ?></p>
+                                                <p class="text-sm md:text-base"><?= $review['review'] ?? '' ?></p>
                                         </article>
                                 <?php } ?>
 
                                 <!-- Leave a Review Form -->
-                                <article class="bg-gray-100 rounded-md w-[85%] mx-auto p-4 px-16 my-3 mt-8 shadow-xl">
-                                        <h3 class="text-2xl uppercase text-center  my-4">Comment avez-vous apprécié votre visite?</h3>
+                                <article class="bg-gray-100 rounded-md mx-auto p-4 px-6 md:px-16 my-3 mt-8 shadow-xl">
+                                        <h3 class="text-base md:text-2xl uppercase text-center  my-4">Comment avez-vous apprécié votre visite?</h3>
                                         <?php include_once(__DIR__ . '/_components/ReviewForm.php') ?>
                                 </article>
                         </div>

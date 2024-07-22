@@ -10,20 +10,20 @@ if ($result = $mysqli->query("SELECT * FROM campings WHERE actif = 1 ORDER BY po
 }
 ?>
 
-<div class="min-h-screen flex justify-between">
+<div class="min-h-screen w-[100vw] flex justify-between">
   <!-- Include Sidebar -->
-  <?php include_once(__DIR__ . '/_components/Sidebar.php') ?>
+    <?php include_once(__DIR__ . '/_components/Sidebar.php') ?>
 
-  <div class="flex flex-col justify-between w-[80vw]">
+  <div class="flex flex-col justify-between w-[100vw] lg:w-[80vw]">
     <!-- Include Navbar -->
     <?php include_once(__DIR__ . '/_components/Navbar.php') ?>
 
-    <main class="flex-1 p-10 pl-16">
+    <main class="flex-1 py-12 px-[5vw] bg-gray-100">
       <!-- Title -->
-      <h1 class="text-4xl font-light uppercase text-center mb-6">Nos campings <span class="text-[#E28F20] font-bold">les plus populaires</span></h1>
+      <h1 class="text-2xl md:text-3xl lg:text-4xl font-light uppercase text-center mb-6">Nos campings <span class="text-[#E28F20] font-bold">les plus populaires</span></h1>
 
       <!-- Campings list -->
-      <div class="flex flex-wrap justify-between">
+      <div class="flex flex-wrap justify-center">
         <?php foreach ($campings as $camping) { ?>
           <!-- Camping card -->
           <div class="w-[250px] text-gray-900 rounded-[5px] m-[10px] bg-white shadow-xl">

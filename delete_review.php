@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Include Header
 include_once(__DIR__ . '/_components/Header.php');
 
@@ -10,7 +13,7 @@ if (!isset($_GET['id'])) {
 
 
 // Preparing the SQL query
-if ($request = $mysqli->prepare("SELECT * FROM reviews WHERE id=?")) {
+if ($request = $mysqli->prepare("SELECT * FROM reviews WHERE review_id=?")) {
   // Binding parameters to the prepared query
   $request->bind_param("i", $_GET['id']);
   // Query execution
@@ -32,15 +35,15 @@ if (!$review) {
 }
 ?>
 
-<div class="min-h-screen flex justify-between bg-gray-100">
+<div class="min-h-screen w-[100vw] flex justify-between">
   <!-- Include Sidebar -->
-  <?php include_once(__DIR__ . '/_components/Sidebar.php'); ?>
+    <?php include_once(__DIR__ . '/_components/Sidebar.php') ?>
 
-  <div class="flex flex-col justify-between w-[80vw]">
+  <div class="flex flex-col justify-between w-[100vw] lg:w-[80vw]">
     <!-- Include Navbar -->
-    <?php include_once(__DIR__ . '/_components/Navbar.php'); ?>
+    <?php include_once(__DIR__ . '/_components/Navbar.php') ?>
 
-    <main class="">
+    <main class="flex-1 py-12 px-[5vw] bg-gray-100">
       <div class="mx-auto py-16 px-20 bg-gray-100 w-full flex-1 flex flex-col justify-center gap-10">
         <article class="bg-white rounded-md w-[70%] mx-auto p-4 px-16 my-3 shadow-xl py-10">
           <h1 class="text-2xl text-center uppercase font-semibold mb-4">Supprimer un commentaire</h1>
@@ -62,7 +65,7 @@ if (!$review) {
             <a href="fiche_camping.php?id=<?= htmlspecialchars($review['camping_id']) ?>" class="px-4 py-1 hover:bg-[#99AB93] text-white bg-[#738C69] transition-all duration-300 cursor-pointer rounded-md">Retour</a>
 
             <form action="/evasion-camping/_actions/act-delete_review.php" method="POST">
-              <input type="hidden" name="id" value="<?= $review['id'] ?>">
+              <input type="hidden" name="review_id" value="<?= $review['review_id'] ?>">
               <input type="hidden" name="camping_id" value="<?= $review['camping_id'] ?>">
               <input type="submit" value="Confirmer" class="px-4 py-1 bg-red-500 text-white hover:bg-red-600 transition-all duration-300 cursor-pointer rounded-md">
             </form>

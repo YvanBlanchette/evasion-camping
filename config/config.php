@@ -7,9 +7,9 @@ if (isset($_POST['toggle_role'])) {
 }
 
 // ADMIN variable based on the session
-$ADMIN = isset($_SESSION['ADMIN']) ?? $_SESSION['ADMIN'];
+$ADMIN = isset($_SESSION['ADMIN']) ? $_SESSION['ADMIN'] : false;
 
 $username = "root";
-$password = "mysql";
+$password = "Y11j09r85B";
 $host = "localhost";
 $database = "evasion_camping";

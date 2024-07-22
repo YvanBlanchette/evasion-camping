@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Include Header
 include_once(__DIR__ . '/_components/Header.php');
 
@@ -21,15 +24,15 @@ if ($result = $mysqli->query("SELECT * FROM regions ORDER BY id ASC")) {
 ?>
 
 
-<div class="min-h-screen flex justify-between">
+<div class="min-h-screen w-[100vw] flex justify-between">
   <!-- Include Sidebar -->
-  <?php include_once(__DIR__ . '/_components/Sidebar.php'); ?>
+    <?php include_once(__DIR__ . '/_components/Sidebar.php') ?>
 
-  <div class="flex flex-col justify-between w-[80vw]">
+  <div class="flex flex-col justify-between w-[100vw] lg:w-[80vw]">
     <!-- Include Navbar -->
-    <?php include_once(__DIR__ . '/_components/Navbar.php'); ?>
+    <?php include_once(__DIR__ . '/_components/Navbar.php') ?>
 
-    <main class="">
+    <main class="flex-1 py-12 px-[5vw] bg-gray-100">
       <div class="mx-auto pt-6 pb-10 pl-10 pr-8 bg-gray-100 w-full flex-1 flex flex-col justify-center gap-10">
         <article class="bg-[#CDD4CC]/50 rounded-md mx-auto p-4 px-10 my-3 shadow-xl py-10">
           <h1 class="text-4xl text-center uppercase font-semibold mb-4">Ajouter un <span class="text-[#E28F20] font-bold">camping</span></h1>

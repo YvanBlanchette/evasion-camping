@@ -32,15 +32,15 @@ if (!$experience) {
 }
 ?>
 
-<div class="min-h-screen flex justify-between bg-gray-100">
+<div class="min-h-screen w-[100vw] flex justify-between">
   <!-- Include Sidebar -->
-  <?php include_once(__DIR__ . '/_components/Sidebar.php'); ?>
+    <?php include_once(__DIR__ . '/_components/Sidebar.php') ?>
 
-  <div class="flex flex-col justify-between w-[80vw]">
+  <div class="flex flex-col justify-between w-[100vw] lg:w-[80vw]">
     <!-- Include Navbar -->
-    <?php include_once(__DIR__ . '/_components/Navbar.php'); ?>
+    <?php include_once(__DIR__ . '/_components/Navbar.php') ?>
 
-    <main class="">
+    <main class="flex-1 py-12 px-[5vw] bg-gray-100">
       <div class="mx-auto py-16 px-20 bg-gray-100 w-full flex-1 flex flex-col justify-center gap-10">
         <article class="bg-white rounded-md w-[70%] mx-auto p-4 px-16 my-3 shadow-xl py-10">
           <h1 class="text-2xl text-center uppercase font-semibold mb-4">Supprimer une <span class="text-[#E28F20] font-bold">expérience</span></h1>

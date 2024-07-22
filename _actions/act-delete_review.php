@@ -1,14 +1,14 @@
 <?php
 // Verifying that the form is submitted and that the review ID is set
-if (isset($_POST['id'])) {
+if (isset($_POST['review_id'])) {
 
   // Connecting to the database
   include_once('../include/db.php');
 
   // Preparing the DELETE SQL Query
-  if ($request = $mysqli->prepare("DELETE FROM reviews WHERE id = ?")) {
+  if ($request = $mysqli->prepare("DELETE FROM reviews WHERE review_id = ?")) {
     // Binding the review ID parameter to the prepared query
-    $request->bind_param("i", $_POST['id']);
+    $request->bind_param("i", $_POST['review_id']);
 
     // Executing the query
     if ($request->execute()) {

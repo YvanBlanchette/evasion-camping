@@ -7,6 +7,13 @@ if ($mysqli->connect_errno) {
   exit();
 }
 
+// Variable in sesson for mobile navigation
+if (!isset($_SESSION['mobileNavOpen'])) {
+  $_SESSION['mobileNavOpen'] = false;
+}
+
+$mobileNavOpen = $_SESSION['mobileNavOpen'];
+
 ?>
 
 <!DOCTYPE html>

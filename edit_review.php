@@ -9,7 +9,7 @@ if (!isset($_GET['id'])) {
 }
 
 // Preparing the SQL query to get the review data
-if ($request = $mysqli->prepare("SELECT * FROM reviews WHERE id=?")) {
+if ($request = $mysqli->prepare("SELECT * FROM reviews WHERE review_id=?")) {
   // Binding parameters to the prepared query
   $request->bind_param("i", $_GET['id']);
   // Query execution
@@ -43,15 +43,15 @@ if (!$res) {
 }
 ?>
 
-<div class="min-h-screen flex justify-between bg-gray-100">
+<div class="min-h-screen w-[100vw] flex justify-between">
   <!-- Include Sidebar -->
-  <?php include_once(__DIR__ . '/_components/Sidebar.php'); ?>
+    <?php include_once(__DIR__ . '/_components/Sidebar.php') ?>
 
-  <div class="flex flex-col justify-between w-[80vw]">
+  <div class="flex flex-col justify-between w-[100vw] lg:w-[80vw]">
     <!-- Include Navbar -->
-    <?php include_once(__DIR__ . '/_components/Navbar.php'); ?>
+    <?php include_once(__DIR__ . '/_components/Navbar.php') ?>
 
-    <main class="">
+    <main class="flex-1 py-12 px-[5vw] bg-gray-100">
       <div class="mx-auto py-16 px-20 bg-gray-100 w-full flex-1 flex flex-col justify-center gap-10">
         <article class="bg-[#CDD4CC]/50 rounded-md w-[70%] mx-auto p-4 px-16 my-3 shadow-xl py-10">
           <h1 class="text-4xl text-center uppercase font-semibold mb-4">Modifier un <span><span class="text-[#E28F20] font-bold">commentaire</span></h1>
@@ -77,20 +77,6 @@ if (!$res) {
                   ?>
                 </select>
               </div>
-              <!-- Camping visited -->
-              <div class="flex flex-col gap-1 w-full text-end">
-                <label class="block" for="camping_id">Camping visité<span class="text-red-500"> *</span></label>
-                <select disabled name="camping_id" id="camping_id" class="w-full text-end px-2 py-1 bg-white" required>
-                  <?php
-                  // Loop through the campings and populate the options
-                  foreach ($campings as $camping) {
-                    // Check if current camping matches the review's camping_id, select it
-                    $selected = ($camping['id'] == $review['camping_id']) ? 'selected' : '';
-                    echo "<option value='{$camping['id']}' $selected>" . htmlspecialchars($camping['name']) . "</option>";
-                  }
-                  ?>
-                </select>
-              </div>
             </div>
             <div class="flex justify-between items-center gap-10 mb-4">
               <!-- Username -->
@@ -112,7 +98,8 @@ if (!$res) {
             </div>
             <div class="flex items-center gap-4 mt-4 justify-end">
               <a href="fiche_camping.php?id=<?= htmlspecialchars($review['camping_id']) ?>" class="px-4 py-1 hover:bg-[#99AB93] text-white bg-[#738C69] transition-all duration-300 cursor-pointer rounded-md">Retour</a>
-              <input type="hidden" name="id" value="<?= htmlspecialchars($review['id']) ?>" hidden>
+              <input type="hidden" name="review_id" value="<?= $review['review_id'] ?>" hidden>
+              <input type="hidden" name="camping_id" value="<?= $review['camping_id'] ?>" hidden>
               <input type="submit" value="Modifier" class="px-4 py-1 hover:bg-[#E28F20]/80 text-white bg-[#E28F20] transition-all duration-300 cursor-pointer rounded-md">
             </div>
           </form>

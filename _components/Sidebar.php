@@ -31,7 +31,7 @@ function renderMenuItem($link, $pathname)
 
   return "
     <li class='py-4 $activeClass'>
-        <a href='{$link['href']}' class='text-xl px-8 transition-all duration-300 flex items-center gap-2 uppercase'>
+        <a href='{$link['href']}' class='text-lg px-8 transition-all duration-300 flex items-center gap-2 uppercase'>
             <i class='{$link['icon']} text-lg'></i>
             {$link['name']}
         </a>
@@ -39,12 +39,17 @@ function renderMenuItem($link, $pathname)
   ";
 }
 
-?>
 
-<aside>
-  <div class="fixed flex flex-col justify-between h-full w-[20vw] bg-lightGreen">
+?>
+  <aside  id="mobile-nav" class="<?php echo $mobileNavOpen ? 'inline-block w-[100vw]' : 'hidden'; ?> lg:inline-block lg:w-[20vw] z-[1000]">
+  <div class="fixed flex flex-col justify-between h-full w-full lg:w-[20vw] bg-lightGreen">
+    <div class="absolute top-3 right-6">
+        <button id="close-nav-btn" class="border-none bg-transparent lg:hidden">
+            <i class="fa-solid fa-xmark text-3xl hover:text-[#E28F20] transition-all duration-300 pt-1"></i>
+        </button>
+    </div>
     <a href="index.php" class="px-12 pt-4 pb-4">
-      <img src="./images/evasion-camping_logo.svg" alt="Évasion Camping Logo">
+      <img src="./images/evasion-camping_logo.svg" alt="Évasion Camping Logo" class="max-w-[250px] mx-auto">
     </a>
 
     <nav class="flex-1 flex flex-col">
