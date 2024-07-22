@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : mer. 17 juil. 2024 à 21:15
+-- Généré le : lun. 22 juil. 2024 à 05:26
 -- Version du serveur : 8.0.36
 -- Version de PHP : 7.4.33
 
@@ -69,7 +69,8 @@ INSERT INTO `campings` (`id`, `name`, `region`, `address`, `city`, `postal_code`
 (17, 'Camping La Belle Étoile', 'Côte-Nord', '3637 Rue de l\'Île', 'Sept-Îles', 'G4R 4L2', 'À Sept-Îles, le Camping La Belle Étoile est idéal pour les amateurs de plein air avec ses plages de sable et ses forêts denses. Les visiteurs peuvent explorer la région, pratiquer des sports nautiques et profiter de la tranquillité du bord de mer.', 254, 3560, 2, 1, 1, '2024-07-12', 2, 324),
 (18, 'Camping Les Pionniers', 'Centre-du-Québec', '3839 Avenue des Sommets', 'Victoriaville', 'G6P 4T7', 'Situé à Victoriaville, le Camping Les Pionniers est entouré de forêts et de champs, offrant un cadre idéal pour des vacances tranquilles. Les campeurs peuvent participer à des randonnées, des visites de fermes locales et des activités en famille.', 116, 4717, 5, 1, 0, '2024-07-12', 3, 324),
 (19, 'Camping Le Ruisseau', 'Laurentides', '4041 Chemin des Cascades', 'Mont-Laurier', 'J9L 3H9', 'À Mont-Laurier, le Camping Le Ruisseau est un refuge naturel avec ses rivières cristallines et ses bois paisibles. Les visiteurs peuvent profiter de la pêche, des balades en forêt et des soirées conviviales autour du feu de camp.', 195, 5996, 2, 1, 1, '2024-07-12', 5, 324),
-(20, 'Camping Les Étoiles', 'Bas-Saint-Laurent', '4243 Route de la Vallée', 'Saint-Félicien', 'G8K 1R1', 'Situé à Saint-Félicien, le Camping Les Étoiles offre une expérience unique sous un ciel étoilé. Avec des activités comme le canoë, les randonnées et l\'observation de la faune, ce camping est parfait pour ceux qui cherchent à se reconnecter avec la nature.', 266, 4614, 2, 1, 0, '2024-07-12', 2, 324);
+(20, 'Camping Les Étoiles', 'Bas-Saint-Laurent', '4243 Route de la Vallée', 'Saint-Félicien', 'G8K 1R1', 'Situé à Saint-Félicien, le Camping Les Étoiles offre une expérience unique sous un ciel étoilé. Avec des activités comme le canoë, les randonnées et l\'observation de la faune, ce camping est parfait pour ceux qui cherchent à se reconnecter avec la nature.', 266, 4614, 2, 1, 0, '2024-07-12', 2, 324),
+(49, 'Camping Banana Slama', 'Mauricie', '1234, chemin du bananier', 'BananaVille', 'B4N 4N4', 'Camping de Donkey Kong et ses amis lol', 100, 1000, 5, 1, 1, '2024-07-02', 2, 501);
 
 -- --------------------------------------------------------
 
@@ -94,6 +95,42 @@ INSERT INTO `experiences` (`id`, `name`, `description`) VALUES
 (4, 'Camping en tente', 'Vivez une expérience authentique avec notre camping en tente. Idéal pour les puristes, montez votre tente et dormez à la belle étoile, entouré par les sons et les odeurs apaisants de la nature.'),
 (5, 'Prêts à camper', 'Simplifiez votre séjour avec notre expérience Prêts à camper. Tout est préparé pour vous : tentes ou cabanes aménagées, prêtes à vous accueillir dès votre arrivée pour un séjour confortable et sans stress.'),
 (6, 'Familiale', 'Découvrez nos campings idéaux pour des vacances en famille, offrant des installations adaptées aux enfants, des activités ludiques pour tous les âges, et un environnement sécurisé pour créer des souvenirs inoubliables en famille.');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `regions`
+--
+
+CREATE TABLE `regions` (
+  `id` int NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `province` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `country` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `regions`
+--
+
+INSERT INTO `regions` (`id`, `name`, `province`, `country`) VALUES
+(1, 'Bas-Saint-Laurent', 'Québec', 'Canada'),
+(2, 'Saguenay-Lac-Saint-Jean', 'Québec', 'Canada'),
+(3, 'Capitale-Nationale', 'Québec', 'Canada'),
+(4, 'Mauricie', 'Québec', 'Canada'),
+(5, 'Estrie', 'Québec', 'Canada'),
+(6, 'Montréal', 'Québec', 'Canada'),
+(7, 'Outaouais', 'Québec', 'Canada'),
+(8, 'Abitibi-Témiscamingue', 'Québec', 'Canada'),
+(9, 'Côte-Nord', 'Québec', 'Canada'),
+(10, 'Nord-du-Québec', 'Québec', 'Canada'),
+(11, 'Gaspésie-Îles-de-la-Madeleine', 'Québec', 'Canada'),
+(12, 'Chaudière-Appalaches', 'Québec', 'Canada'),
+(13, 'Laval', 'Québec', 'Canada'),
+(14, 'Lanaudière', 'Québec', 'Canada'),
+(15, 'Laurentides', 'Québec', 'Canada'),
+(16, 'Montérégie', 'Québec', 'Canada'),
+(17, 'Centre-du-Québec', 'Québec', 'Canada');
 
 -- --------------------------------------------------------
 
@@ -215,7 +252,8 @@ INSERT INTO `reviews` (`id`, `camping_id`, `username`, `email`, `date`, `nb_star
 (97, 20, 'Julie', 'julie@example.com', '2023-07-22', 4, 'Les installations sont modernes et bien équipées. Personnel accueillant.'),
 (98, 20, 'Léa', 'lea@example.com', '2023-09-12', 5, 'Les services sont de qualité et l\'ambiance est conviviale. À recommander!'),
 (99, 20, 'Julien', 'julien@example.com', '2023-07-30', 4, 'Les tarifs sont raisonnables pour la région. Très bon rapport qualité-prix.'),
-(100, 20, 'Emma', 'emma@example.com', '2023-08-10', 3, 'L\'accès Wi-Fi est limité mais le cadre naturel compense largement.');
+(100, 20, 'Emma', 'emma@example.com', '2023-08-10', 3, 'L\'accès Wi-Fi est limité mais le cadre naturel compense largement.'),
+(111, 49, 'MarioB', 'MBrothers@example.com', '2024-07-19', 3, 'Beau camping, propriétaires plutôt turbulants et bruyants. Il faut aimer les bananes...');
 
 --
 -- Index pour les tables déchargées
@@ -235,6 +273,12 @@ ALTER TABLE `experiences`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `regions`
+--
+ALTER TABLE `regions`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `reviews`
 --
 ALTER TABLE `reviews`
@@ -248,7 +292,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT pour la table `campings`
 --
 ALTER TABLE `campings`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT pour la table `experiences`
@@ -257,10 +301,16 @@ ALTER TABLE `experiences`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT pour la table `regions`
+--
+ALTER TABLE `regions`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
 -- AUTO_INCREMENT pour la table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- Contraintes pour les tables déchargées
